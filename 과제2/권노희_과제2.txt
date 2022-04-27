@@ -1,0 +1,122 @@
+<activity_main.xml>
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/editTextNumber1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/editTextNumber2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btnNewActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClicked"
+        android:text="계산하기"/>
+
+    <RadioGroup
+        android:id="@+id/rGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/radio_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="더하기" />
+        <RadioButton
+            android:id="@+id/radio_sub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="빼기" />
+        <RadioButton
+            android:id="@+id/radio_mul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="곱하기" />
+        <RadioButton
+            android:id="@+id/radio_div"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="나누기" />
+    </RadioGroup>
+</LinearLayout>
+
+
+---------------------------------------------------------------------------------------------------------------
+<MainActivity.kt>
+
+package com.example.kotlin_02
+
+import android.os.Bundle
+import android.view.View
+import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+    private var result = 0
+    var eText1: EditText? = null
+    var eText2: EditText? = null
+    var rButton1: RadioButton? = null
+    var rButton2: RadioButton? = null
+    var rButton3: RadioButton? = null
+    var rButton4: RadioButton? = null
+    @Overrideprotected
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        eText1 = findViewById<View>(R.id.editTextNumber1) as EditText
+        eText2 = findViewById<View>(R.id.editTextNumber2) as EditText
+        eText1!!.inputType = 0
+        eText2!!.inputType = 0
+        rButton1 = findViewById<View>(R.id.radio_add) as RadioButton
+        rButton2 = findViewById<View>(R.id.radio_sub) as RadioButton
+        rButton3 = findViewById<View>(R.id.radio_mul) as RadioButton
+        rButton4 = findViewById<View>(R.id.radio_div) as RadioButton
+    }
+
+    annotation class Overrideprotected
+
+    fun onClicked(view: View) {
+        when (view.id) {
+            R.id.btnNewActivity -> if (rButton1!!.isChecked) {
+                result = eText1!!.text.toString().toInt() + eText2!!.text.toString().toInt()
+                Toast.makeText(applicationContext, "결과$result", Toast.LENGTH_SHORT).show()
+            } else if (rButton2!!.isChecked) {
+                result = eText1!!.text.toString().toInt() - eText2!!.text.toString().toInt()
+                Toast.makeText(applicationContext, "결과$result", Toast.LENGTH_SHORT).show()
+            } else if (rButton3!!.isChecked) {
+                result = eText1!!.text.toString().toInt() * eText2!!.text.toString().toInt()
+                Toast.makeText(applicationContext, "결과$result", Toast.LENGTH_SHORT).show()
+            } else {
+                result = eText1!!.text.toString().toInt() / eText2!!.text.toString().toInt()
+                Toast.makeText(applicationContext, "결과$result", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
