@@ -1,0 +1,136 @@
+<MainActivity.kt>
+package kr.ac.skuniv.calculator
+
+import android.annotation.SuppressLint
+import android.graphics.Color
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import android.widget.*
+
+
+class MainActivity : AppCompatActivity(){
+    lateinit var edit1 : EditText;  lateinit var edit2 : EditText
+    lateinit var btnAdd : RadioButton;   lateinit var btnSub : RadioButton
+    lateinit var btnMul : RadioButton;   lateinit var btnDiv : RadioButton
+    lateinit var button : Button
+    lateinit var num1 : String;     lateinit var num2 : String
+    var result : Int? = null;
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        title = " Kotlin 계산기"
+
+        edit1 = findViewById<EditText>(R.id.Edit1)
+        edit2 = findViewById<EditText>(R.id.Edit2)
+        btnAdd = findViewById<RadioButton>(R.id.BtnAdd)
+        btnSub = findViewById<RadioButton>(R.id.BtnSub)
+        btnMul = findViewById<RadioButton>(R.id.BtnMul)
+        btnDiv = findViewById<RadioButton>(R.id.BtnDiv)
+        button = findViewById<Button>(R.id.button)
+
+        button.setOnTouchListener { view, motionEvent ->
+            if (btnAdd.isChecked()){
+            num1 = edit1.text.toString()
+            num2 = edit2.text.toString()
+            result = Integer.parseInt(num1) + Integer.parseInt(num2)
+                Toast.makeText(applicationContext,"계산결과 :  ${result}",
+                    Toast.LENGTH_SHORT).show()
+            false
+        }
+            else if (btnSub.isChecked()){
+                num1 = edit1.text.toString()
+                num2 = edit2.text.toString()
+                result = Integer.parseInt(num1) - Integer.parseInt(num2)
+                Toast.makeText(applicationContext,"계산결과 :  ${result}",
+                    Toast.LENGTH_SHORT).show()
+                false
+            }
+            else if (btnMul.isChecked()){
+                num1 = edit1.text.toString()
+                num2 = edit2.text.toString()
+                result = Integer.parseInt(num1) * Integer.parseInt(num2)
+                Toast.makeText(applicationContext,"계산결과 :  ${result}",
+                    Toast.LENGTH_SHORT).show()
+                false
+            }
+            else {
+                num1 = edit1.text.toString()
+                num2 = edit2.text.toString()
+                result = Integer.parseInt(num1) / Integer.parseInt(num2)
+                Toast.makeText(applicationContext,"계산결과 :  ${result}",
+                    Toast.LENGTH_SHORT).show()
+                false
+            }
+
+
+    }
+
+}}
+
+
+
+<activity_main.xml>
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <EditText
+        android:id="@+id/Edit1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+
+        android:inputType="number" />
+    <EditText
+        android:id="@+id/Edit2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" />
+    <RadioGroup
+        android:id= "@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/BtnAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="더하기" />
+        <RadioButton
+            android:id="@+id/BtnSub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="빼기" />
+        <RadioButton
+            android:id="@+id/BtnMul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="곱하기" />
+        <RadioButton
+            android:id="@+id/BtnDiv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="나누기" />
+    </RadioGroup>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="계산하기" />
+</LinearLayout>
+
